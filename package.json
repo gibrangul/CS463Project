@@ -1,0 +1,13 @@
+{
+  "name": "WebProject",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Gibran <gibrangul@hotmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^5.2.0"
+  },
+  "scripts": {
+    "dev": "concurrently \"cd server && yarn start-dev\" \"cd client && yarn start\""
+  }
+}
