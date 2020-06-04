@@ -1,26 +1,3 @@
-<<<<<<< HEAD
-const express = require("express")
-const bodyParser = require("body-parser")
-const cors = require('cors')
-
-
-const port = 3001
-const app = express()
-
-app.use(bodyParser.json())
-app.use(cors())
-
-app.get('/', (req, res) => {
-  res.send({
-    message: "Hello World"
-  })
-})
-
-app.listen(port, () => {
-  console.log(`Server up on port ${port}`)
-})
-
-=======
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -53,4 +30,3 @@ mongoose
   .catch((err) => {
     console.log('Error connecting to database', err);
   });
->>>>>>> 87a3f6ce74dfc0e8b1c5c8232175691ca7c29a52
