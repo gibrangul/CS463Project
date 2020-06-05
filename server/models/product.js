@@ -12,30 +12,35 @@ const productSchema = new Schema({
     required: true,
   },
   category: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Category',
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
+    name: {
+      type: String,
+    },
   },
   brand: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true
+      required: true,
     },
     name: {
-      type: String
-    }
+      type: String,
+    },
   },
   size: {
     type: String,
-    required: true
+    required: true,
   },
   upc: {
     type: String,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
-  }
+    required: true,
+  },
 });
 
 module.exports = mongoose.model('Product', productSchema);
