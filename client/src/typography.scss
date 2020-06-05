@@ -1,0 +1,128 @@
+$base-font-size: 18px;
+
+*,
+html,
+body {
+  font-size: $base-font-size;
+  font-family: "Roboto", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+li {
+  color: $colorTextPrimary;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 2.25em;
+  line-height: 3em;
+}
+
+h2 {
+  font-size: 1.875em;
+  line-height: 3em;
+}
+
+h3 {
+  font-size: 1.625em;
+  line-height: 2.5em;
+}
+
+h4 {
+  font-size: 1.375em;
+  line-height: 2em;
+}
+
+h5 {
+  font-size: 1.25em;
+  line-height: 2em;
+}
+
+h6 {
+  font-size: 1.125;
+  line-height: 2em;
+}
+
+a {
+  font-size: 1em;
+  line-height: 1.5em;
+  text-decoration: none;
+  color: $colorPrimary;
+  // font-weight: 400;
+  &:visited {
+    color: $colorPrimary;
+  }
+}
+
+.p1 {
+  font-size: 1em;
+  line-height: 1.5em;
+}
+
+.p2 {
+  font-size: 0.875em;
+  line-height: 1.5em;
+}
+
+.cap {
+  font-size: 0.75em;
+  line-height: 1.25em;
+  color: $colorTextTertiary;
+}
+
+.medium-font {
+  font-weight: 500;
+}
+
+.regular-font {
+  font-weight: 400;
+}
+
+.light-font {
+  font-weight: 300;
+}
+
+.primary-text {
+  color: $colorTextPrimary;
+}
+
+.secondary-text {
+  color: $colorTextSecondary;
+}
+
+.tertiary-text {
+  color: $colorTextTertiary;
+}
+
+.link-text {
+  color: $colorPrimary;
+}
+
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Old versions of Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+}

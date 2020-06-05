@@ -1,0 +1,189 @@
+@import "../../colors.scss";
+@import "../../typography.scss";
+
+.input-container {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+
+  .icon-input {
+    height: 38px;
+    padding-left: 16px;
+    padding-right: 48px;
+    border-radius: 4px;
+    border: 1px solid $colorStroke;
+    box-shadow: 0 1px 2px rgba($color: black, $alpha: 0.12) inset;
+    @extend .p2;
+    @extend .primary-text;
+    &::placeholder {
+      @extend .tertiary-text;
+    }
+
+    &:focus {
+      border-color: $colorPrimary;
+      outline: none;
+    }
+  }
+
+  .icon {
+    position: absolute;
+    right: 8px;
+  }
+}
+
+.field_container {
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  margin: 1.5vw;
+  label {
+    color: #6b6c6f;
+    line-height: 18px;
+    font-weight: 500;
+    font-weight: normal;
+    font-size: 14px;
+    margin: 2px;
+    a {
+      font-size: 1000px;
+    }
+  }
+
+  input {
+    padding-left: 1vw;
+    line-height: 5vh;
+    border-radius: 4px;
+    border: 1px solid rgb(135, 138, 146);
+    box-sizing: border-box;
+    background: none;
+    &:focus {
+      outline: none;
+      border: 2px solid #1665d8;
+    }
+  }
+
+  .image_label {
+    background: url("../../Images/Icons/logo.png") no-repeat;
+    height: 23vh;
+    width: 10vw;
+
+    cursor: pointer;
+    input[type="file"] {
+      display: none;
+    }
+  }
+
+  .submit_btn {
+    background: linear-gradient(180deg, #38b248 0%, #34aa44 100%);
+    border-radius: 4px;
+    color: white;
+    padding-left: 0;
+    outline: none;
+    &:focus {
+      border: 0px;
+    }
+  }
+}
+
+.simple-dropdown {
+  width: 180px;
+  margin-right: 30px;
+  .rw-widget {
+    .rw-widget-container {
+      height: 38px;
+      cursor: pointer;
+      border: 1px solid $colorStroke;
+      border-radius: 4px;
+      box-shadow: 0px 1px 2px rgba($color: black, $alpha: 0.1);
+      &:hover {
+        border-color: $colorPrimary;
+      }
+      .rw-input {
+        padding-left: 16px;
+        @extend .primary-text;
+        @extend .p2;
+        @extend .no-select;
+      }
+
+      .rw-select {
+        .rw-btn-select {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          .rw-i-caret-down {
+            width: 25px;
+            height: 25px;
+            background-size: 25px;
+            content: url("../../Images/Icons/Chevron/VerticalChev.png");
+          }
+        }
+      }
+    }
+
+    .rw-popup {
+      margin-top: 4px;
+      border-radius: 4px;
+      border: 1px solid $colorStroke;
+      box-shadow: 0px 1px 2px rgba($color: black, $alpha: 0.1);
+
+      .rw-list {
+        .rw-list-option {
+          @extend .p2;
+          min-height: 38px;
+          display: flex;
+          align-items: center;
+          padding-left: 16px;
+          border: none;
+
+          &:first-child {
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+          }
+
+          &:last-child {
+            border-bottom-left-radius: 3px;
+            border-bottom-right-radius: 3px;
+          }
+
+          &:hover {
+            background-color: $colorPrimary;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+.dropdown-dropUp {
+  .rw-widget {
+    .rw-popup {
+      margin-bottom: 4px;
+    }
+  }
+}
+
+.label-dropdown {
+  @extend .simple-dropdown;
+  width: 220px;
+  .rw-input {
+    .flex-row {
+      p {
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+.rw-state-focus > .rw-widget-container,
+.rw-state-focus > .rw-widget-container:hover {
+  border-color: $colorPrimary;
+  box-shadow: none;
+}
+
+.rw-list-option.rw-state-selected,
+.rw-list-option.rw-state-selected:hover {
+  background-color: $colorPrimary;
+  border-color: $colorPrimary;
+}

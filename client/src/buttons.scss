@@ -1,0 +1,73 @@
+@import "./colors.scss";
+@import "./typography.scss";
+
+.btn {
+  @extend .p2;
+  @extend .link-text;
+  @extend .no-select;
+  padding: 0 8px;
+  border: none;
+  border-radius: 4px;
+  height: 38px;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn-primary-border {
+  @extend .btn;
+  background-color: $colorPrimary;
+  color: white;
+  padding: 0 24px;
+  border: 1px solid #1461d2;
+  background: rgb(30, 110, 228);
+  box-shadow: 0 1px 2px rgba($color: white, $alpha: 0.1) inset;
+  background: rgb(22, 101, 216);
+  background: linear-gradient(
+    0deg,
+    rgba(22, 101, 216, 1) 0%,
+    rgba(30, 110, 228, 1) 100%
+  );
+
+  &:hover {
+    border-color: #0e57c2;
+    background: rgb(17, 95, 207);
+    background: linear-gradient(
+      0deg,
+      rgba(17, 95, 207, 1) 0%,
+      rgba(23, 102, 219, 1) 100%
+    );
+  }
+
+  &:active {
+    border-color: #0b4aa5;
+    background: rgb(14, 85, 189);
+    background: linear-gradient(
+      0deg,
+      rgba(14, 85, 189, 1) 0%,
+      rgba(15, 90, 200, 1) 100%
+    );
+  }
+
+  &:disabled {
+    background: #747578;
+    border-color: #696a62;
+    box-shadow: none;
+    cursor: default;
+  }
+}
+
+.btn-icon-small {
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    cursor: default;
+  }
+}
+
+

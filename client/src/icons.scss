@@ -1,0 +1,74 @@
+.icon {
+  width: 30px;
+  height: 30px;
+  background-size: 30px;
+  background-repeat: no-repeat;
+}
+
+.small-icon {
+  width: 20px;
+  height: 20px;
+  background-size: 20px;
+  background-repeat: no-repeat;
+}
+
+.left-chevron-icon {
+  background-image: url("./Images/Icons/Chevron/LeftChev.png");
+  &:hover {
+    background-image: url('./Images/Icons/Chevron/LeftChevSelected.png');
+  }
+  &:disabled {
+    background-image: url("./Images/Icons/Chevron/LeftChev.png");
+  }
+}
+
+.right-chevron-icon {
+  background-image: url("./Images/Icons/Chevron/RightChev.png");
+  &:hover {
+    background-image: url('./Images/Icons/Chevron/RightChevSelected.png');
+  }
+}
+
+.dashboard-icon {
+  background-image: url("./Images/Icons/Dashboard.png");
+  &.selected {
+    background-image: url("./Images/Icons/DashboardPrimary.png");
+  }
+}
+
+.retailers-icon {
+  background-image: url("./Images/Icons/Shops.png");
+  &.selected {
+    background-image: url("./Images/Icons/ShopsPrimary.png");
+  }
+}
+
+//categories icon should be placed here
+.categories-icon {
+  background-image: url("./Images/Icons/Users.png");
+  &.selected {
+    background-image: url("./Images/Icons/UsersPrimary.png");
+  }
+}
+
+.products-icon {
+  background-image: url("./Images/Icons/Products.png");
+  &.selected {
+    background-image: url("./Images/Icons/ProductsPrimary.png");
+  }
+}
+
+//brands icon should be placed here
+.brands-icon {
+  background-image: url("./Images/Icons/Delivery.png");
+  &.selected {
+    background-image: url("./Images/Icons/DeliveryPrimary.png");
+  }
+}
+
+.search-icon {
+  background-image: url('./Images/Icons/Search.png');
+  &.selected {
+    background-image: url('./Images/Icons/SearchSelected.png');
+  }
+}

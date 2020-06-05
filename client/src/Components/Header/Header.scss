@@ -1,0 +1,11 @@
+@import '../../colors.scss';
+
+.header{
+  height: 71px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid $colorStroke;
+  padding: 0 30px;
+  background-color: white;
+}
