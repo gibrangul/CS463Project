@@ -15,12 +15,27 @@ const productSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Category',
   },
-  sales: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Sales',
+  brand: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true
+    },
+    name: {
+      type: String
+    }
   },
-
-  //timestamps: true,
+  size: {
+    type: String,
+    required: true
+  },
+  upc: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  }
 });
 
 module.exports = mongoose.model('Product', productSchema);

@@ -37,10 +37,7 @@ exports.addProducts = async (req, res) => {
       message: 'product content can not be empty',
     });
   }
-  const product = new Product({
-    title: req.body.title,
-    price: req.body.price,
-  });
+  const product = new Product(req.body);
   await product
     .save()
     .then((products) => {
