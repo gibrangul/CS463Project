@@ -7,8 +7,6 @@ import ContentHeader from "./ContentHeader";
 import Table from "../../Components/Table";
 import { productsColumns } from "./tableColumns";
 
-import { productsData } from './dummyData';
-
 const ProductsPage = () => {
   const loading = useSelector(
     (state: { isLoading: boolean }) => state.isLoading
