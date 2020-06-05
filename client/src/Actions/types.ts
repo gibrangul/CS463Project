@@ -8,3 +8,6 @@ export const SELECT_PAGE = "SELECT_PAGE";
 
 //loader
 export const SET_LOADER = "SET_LOADER";
+
+//Products
+export const FETCH_PRODUCTS = "FETCH_PRODUCTS";

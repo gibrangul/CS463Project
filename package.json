@@ -5,6 +5,8 @@
   "author": "Gibran <gibrangul@hotmail.com>",
   "license": "MIT",
   "dependencies": {
+    "@types/axios": "^0.14.0",
+    "axios": "^0.19.2",
     "concurrently": "^5.2.0"
   },
   "scripts": {
