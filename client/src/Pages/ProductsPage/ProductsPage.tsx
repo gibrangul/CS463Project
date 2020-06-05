@@ -18,7 +18,7 @@ const ProductsPage = () => {
   const loadData = useCallback(() => {
     dispatch(selectPage(PRODUCTS));
     dispatch(fetchProducts());
-    console.log(products)
+    console.log(Object.values(products))
     setTimeout(() => dispatch(setLoader(false)) , 500)
   }, [dispatch]);
 
@@ -28,13 +28,15 @@ const ProductsPage = () => {
   
   const columns = useMemo(() => productsColumns, []);
 
+  const productsArray = Object.values(products);
+
   return ( !loading &&
     <div className="content">
       <div className="wrapped-content">
         <ContentHeader />
         <Table
           columns={columns}
-          data={productsData}
+          data={productsArray}
           onClick={() => console.log("clicked")}
           className="retailersPageTable"
         />
