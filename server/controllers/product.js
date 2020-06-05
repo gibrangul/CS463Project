@@ -13,7 +13,7 @@ exports.getProducts = async (req, res) => {
     });
 };
 
-exports.findOne = async (req, res) => {
+exports.getProduct = async (req, res) => {
   Product.findById(req.params.productId)
     .then((product) => {
       if (!product) {
@@ -47,6 +47,43 @@ exports.addProducts = async (req, res) => {
       res.status(500).send({
         message:
           err.message || 'Some error occurred while adding the product .',
+      });
+    });
+};
+
+exports.updateProduct = async (req, res) => {
+  if (!req.body || !req.params.productId) {
+    return res.status(400).send({
+      message: 'Incomplete details',
+    });
+  }
+  try {
+    const id = req.params.productId;
+    const doc = await Product.findByIdAndUpdate(id, req.body, { new: true });
+    if (!doc) {
+      return res.status(404).send();
+    }
+    return res.send(doc);
+  } catch (err) {
+    res.status(500).send({
+      message: err.message || 'Error updating Product',
+    });
+  }
+};
+
+exports.deleteProduct = async (req, res) => {
+  Product.findByIdAndRemove(req.params.productId)
+    .then((product) => {
+      if (!product) {
+        return res.status(404).send({
+          message: 'Product not found',
+        });
+      }
+      res.send({ message: 'Product deleted successfully!' });
+    })
+    .catch((err) => {
+      return res.status(500).send({
+        message: err.message || 'Could not delete Product',
       });
     });
 };
