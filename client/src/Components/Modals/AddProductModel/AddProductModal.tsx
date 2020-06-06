@@ -33,9 +33,6 @@ const AddRetailerModal = () => {
     Object.values(state.brands)
   );
 
-  console.log("category: ", category._id);
-  console.log(brand._id);
-
   const handleSubmit = async () => {
     try {
       const products = await axios.post("http://localhost:3001/products/add", {

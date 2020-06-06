@@ -33,7 +33,12 @@ const ProductsPage = () => {
 
   const columns = useMemo(() => productsColumns, []);
 
-  const productsArray = Object.values(products);
+  const productsArray = Object.values(products).map(
+    (data: any, index: number) => ({
+      ...data,
+      index: index + 1,
+    })
+  );
 
   return (
     !loading && (

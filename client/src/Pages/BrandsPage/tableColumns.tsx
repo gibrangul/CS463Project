@@ -4,7 +4,7 @@ import IndexCell from "../../Components/Table/IndexCell";
 export const brandsColumns = [
   {
     Header: "#",
-    accessor: "id",
+    accessor: (d:any) => d.index,
     maxWidth: 66,
     Cell: IndexCell,
   },

@@ -14,7 +14,7 @@ const BrandsPage = () => {
   const brands = useSelector((state: any) => state.brands);
   const loadData = useCallback(() => {
     dispatch(selectPage(BRANDS));
-    dispatch(fetchBrands())
+    dispatch(fetchBrands());
     setTimeout(() => dispatch(setLoader(false)), 500);
   }, [dispatch]);
 
@@ -29,7 +29,10 @@ const BrandsPage = () => {
           <ContentHeader />
           <Table
             columns={brandsColumns}
-            data={Object.values(brands)}
+            data={Object.values(brands).map((data: any, index: number) => ({
+              ...data,
+              index: index + 1,
+            }))}
             onClick={() => console.log("clicked")}
             className="retailersPageTable"
           />

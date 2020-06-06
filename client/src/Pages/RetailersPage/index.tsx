@@ -35,7 +35,10 @@ const RetailersPage = () => {
             <ContentHeader />
             <Table
               columns={columns}
-              data={Object.values(retailers)}
+              data={Object.values(retailers).map((data: any, index: number) => ({
+                ...data,
+                index: index + 1,
+              }))}
               onClick={() => console.log("clicked")}
               className="retailersPageTable"
             />

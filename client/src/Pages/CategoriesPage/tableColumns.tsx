@@ -4,7 +4,7 @@ import IndexCell from '../../Components/Table/IndexCell';
 export const categoriesColumns = [
   {
     Header: "#",
-    accessor: "id",
+    accessor: (d:any) => d.index,
     maxWidth: 66,
     Cell: IndexCell
   },
