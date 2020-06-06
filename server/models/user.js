@@ -22,8 +22,6 @@ const userSchema = new Schema({
 
 userSchema.pre("save", function (next) {
   const user = this;
-  console.log("casladjk");
-
   bcrypt.genSalt(10, function (err, salt) {
     if (err) return next(err);
     bcrypt.hash(user.password, salt, function (err, hash) {
@@ -35,7 +33,6 @@ userSchema.pre("save", function (next) {
 });
 
 userSchema.methods.comparePassword = function (candidatePassword, callback) {
-  console.log(candidatePassword);
   bcrypt.compare(candidatePassword, this.password, function (err, isMatch) {
     if (err) return callback(err);
     callback(null, isMatch);

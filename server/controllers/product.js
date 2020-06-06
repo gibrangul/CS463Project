@@ -3,7 +3,7 @@ const Brand = require("../models/brands");
 const Category = require("../models/category");
 
 exports.getProducts = async (req, res) => {
-  await Product.find()
+  await Product.find({ _vendor: "5edbb5ab647d1e966d328dfa" })
     .then((products) => {
       res.send(products);
     })
@@ -16,7 +16,10 @@ exports.getProducts = async (req, res) => {
 };
 
 exports.getProduct = async (req, res) => {
-  Product.findById(req.params.productId)
+  Product.findOne({
+    _id: req.params.productId,
+    _vendor: "5edbb5ab647d1e966d328dfa",
+  })
     .then((product) => {
       if (!product) {
         return res.status(404).send({
@@ -40,7 +43,8 @@ exports.addProducts = async (req, res) => {
     });
   }
   try {
-    const product = new Product(req.body);
+    const _vendor = "5edbb5ab647d1e966d328dfa";
+    const product = new Product({ ...req.body, _vendor });
     const doc = await product.save();
     await Brand.findByIdAndUpdate(
       doc.brand.id,
@@ -75,8 +79,12 @@ exports.updateProduct = async (req, res) => {
     });
   }
   try {
-    const id = req.params.productId;
-    const doc = await Product.findByIdAndUpdate(id, req.body, { new: true });
+    const _id = req.params.productId;
+    const doc = await Product.findOneAndUpdate(
+      { _id, _vendor: "5edbb5ab647d1e966d328dfa" },
+      { $set: { ...req.body } },
+      { new: true }
+    );
     if (!doc) {
       return res.status(404).send();
     }
@@ -89,7 +97,10 @@ exports.updateProduct = async (req, res) => {
 };
 
 exports.deleteProduct = async (req, res) => {
-  Product.findByIdAndRemove(req.params.productId)
+  Product.findOneAndRemove({
+    _id: req.params.productId,
+    _vendor: "5edbb5ab647d1e966d328dfa",
+  })
     .then((product) => {
       if (!product) {
         return res.status(404).send({
