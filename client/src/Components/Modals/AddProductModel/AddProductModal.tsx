@@ -24,6 +24,7 @@ const AddRetailerModal = () => {
   const [size, setSize] = useState("");
   const [upc, setUpc] = useState("");
   const [description, setDescription] = useState("");
+  const [count, setCount] = useState("");
 
   const categories = useSelector((state: { categories: any }) =>
     Object.values(state.categories)
@@ -35,24 +36,28 @@ const AddRetailerModal = () => {
   console.log("category: ", category._id);
   console.log(brand._id);
 
-
   const handleSubmit = async () => {
-    const products = await axios.post("http://localhost:3001/products/add", {
-      name: name,
-      price: price,
-      size: size,
-      upc: upc,
-      description: description,
-      category: {
-        _id: category._id,
-        name: category.name
-      },
-      brand: {
-        _id: brand._id,
-        name: brand.name
-      }
-    });
-    console.log(products)
+    try {
+      const products = await axios.post("http://localhost:3001/products/add", {
+        title: name,
+        price: price,
+        size: size,
+        count: count,
+        upc: upc,
+        description: description,
+        category: {
+          id: category._id,
+          name: category.name,
+        },
+        brand: {
+          id: brand._id,
+          name: brand.name,
+        }
+      });
+      console.log(products);
+    } catch (err) {
+      throw err;
+    }
   };
 
   function openModal() {
@@ -100,6 +105,11 @@ const AddRetailerModal = () => {
             type="text"
             name="upc"
             onChange={(upc: any) => setUpc(upc.target.value)}
+          />
+          <RenderInput
+            type="text"
+            name="count"
+            onChange={(count: any) => setCount(count.target.value)}
           />
           <RenderInput
             type="text"

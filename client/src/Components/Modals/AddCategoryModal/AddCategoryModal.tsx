@@ -14,7 +14,7 @@ const AddCategoryModal = () => {
   const [categoryName, setCategoryName ] = useState("");
 
   const handleSubmit = async () => {
-    const category = await axios.post("http://localhost:3001/categories/add", {type: categoryName})
+    const category = await axios.post("http://localhost:3001/categories/add", {name: categoryName})
   }
 
   function openModal() {

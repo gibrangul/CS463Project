@@ -33,4 +33,9 @@ export const productsColumns = [
     accessor: "category.name",
     width: 50,
   },
+  {
+    Header: "COUNT",
+    accessor: "count",
+    width: 50,
+  },
 ];
