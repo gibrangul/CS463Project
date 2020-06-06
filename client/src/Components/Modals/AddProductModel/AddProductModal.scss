@@ -1,6 +1,6 @@
 .modal_container {
   position: absolute;
-  top: 20%;
+  top: 10%;
   left: 30%;
   bottom: auto;
   right: auto;
@@ -19,5 +19,7 @@
   height: 60vh;
   flex-direction: column;
   flex-wrap: wrap;
+  // justify-content: center;
+  align-items: center;
 
 }

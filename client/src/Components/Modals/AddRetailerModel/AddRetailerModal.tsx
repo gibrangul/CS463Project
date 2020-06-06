@@ -5,11 +5,29 @@ import { RenderInput, ImageInput } from "../../Fields/index";
 
 import "./AddRetailerModal.scss";
 import { SubmitButton } from "../../Fields/index";
+import axios from 'axios';
 
 Modal.setAppElement("#root");
 
 const AddRetailerModal = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [location, setLocation] = useState("");
+  const [city, setCity] = useState("");
+  const [number, setNumber] = useState("");
+
+  const handleSubmit = async () => {
+    const retailers = await axios.post("http://localhost:3001/retailers", {
+      name: name,
+      email: email,
+      location: location,
+      city: city,
+      number: number
+    });
+    console.log(retailers)
+  };
+
   function openModal() {
     setIsOpen(true);
   }
@@ -32,20 +50,36 @@ const AddRetailerModal = () => {
         // style={customStyles}
         shouldCloseOnEsc={true}
         shouldCloseOnOverlayClick={true}
-        className="modal_container"
+        className="retailer_modal_container"
       >
         <ModalHeader title="Add Retailer" />
-        <form className="modal_elements">
-            <RenderInput type="email" name="Email"  />
-            <RenderInput type="password" name="Password" />
-            <RenderInput type="text" name="Name" />
-            <RenderInput type="text" name="City" />
-            <RenderInput type="text" name="Location" />
-            <RenderInput type="text" name="Category" />
-            <RenderInput type="text" name="Number" />
-            <RenderInput type="text" name="Coordinates" />
-            <ImageInput />
-            <SubmitButton />
+        <form className="retailer_modal_elements" onSubmit={handleSubmit}>
+          <RenderInput
+            type="text"
+            name="Name"
+            onChange={(name: any) => setName(name.target.value)}
+          />
+          <RenderInput
+            type="email"
+            name="Email"
+            onChange={(email: any) => setEmail(email.target.value)}
+          />
+          <RenderInput
+            type="text"
+            name="Location"
+            onChange={(location: any) => setLocation(location.target.value)}
+          />
+          <RenderInput
+            type="text"
+            name="City"
+            onChange={(city: any) => setCity(city.target.value)}
+          />
+          <RenderInput
+            type="text"
+            name="Number"
+            onChange={(number: any) => setNumber(number.target.value)}
+          />
+          <SubmitButton />
         </form>
       </Modal>
     </div>

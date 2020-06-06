@@ -1,6 +1,12 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPage, setLoader, fetchProducts } from "../../Actions";
+import {
+  selectPage,
+  setLoader,
+  fetchProducts,
+  fetchCategories,
+  fetchBrands,
+} from "../../Actions";
 import { PRODUCTS } from "../../Constants/pages";
 import ContentHeader from "./ContentHeader";
 
@@ -16,31 +22,33 @@ const ProductsPage = () => {
   const loadData = useCallback(() => {
     dispatch(selectPage(PRODUCTS));
     dispatch(fetchProducts());
-    console.log(Object.values(products))
-    setTimeout(() => dispatch(setLoader(false)) , 500)
+    dispatch(fetchCategories());
+    dispatch(fetchBrands());
+    setTimeout(() => dispatch(setLoader(false)), 500);
   }, [dispatch]);
 
   useEffect(() => {
     loadData();
   }, [loadData]);
-  
+
   const columns = useMemo(() => productsColumns, []);
 
   const productsArray = Object.values(products);
 
-  return ( !loading &&
-    <div className="content">
-      <div className="wrapped-content">
-        <ContentHeader />
-        <Table
-          columns={columns}
-          data={productsArray}
-          onClick={() => console.log("clicked")}
-          className="retailersPageTable"
-        />
+  return (
+    !loading && (
+      <div className="content">
+        <div className="wrapped-content">
+          <ContentHeader />
+          <Table
+            columns={columns}
+            data={productsArray}
+            onClick={() => console.log("clicked")}
+            className="retailersPageTable"
+          />
+        </div>
       </div>
-    </div>
-
+    )
   );
 };
 
