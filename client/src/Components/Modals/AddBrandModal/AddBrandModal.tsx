@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import ModalHeader from "../ModalHeader";
 import { RenderInput, ImageInput } from "../../Fields/index";
+import axios from 'axios';
 
 import "./AddBrandModal.scss";
 import { SubmitButton } from "../../Fields/index";
@@ -10,6 +11,12 @@ Modal.setAppElement("#root");
 
 const AddBrandModal = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [brandName, setBrandName ] = useState("");
+
+  const handleSubmit = async () => {
+    const brand = await axios.post("http://localhost:3001/brands/add", {name: brandName})
+  }
+
   function openModal() {
     setIsOpen(true);
   }
@@ -32,19 +39,11 @@ const AddBrandModal = () => {
         // style={customStyles}
         shouldCloseOnEsc={true}
         shouldCloseOnOverlayClick={true}
-        className="modal_container"
+        className="brand_modal_container"
       >
-        <ModalHeader title="Add Category" />
-        <form className="modal_elements">
-            <RenderInput type="email" name="Email"  />
-            <RenderInput type="password" name="Password" />
-            <RenderInput type="text" name="Name" />
-            <RenderInput type="text" name="City" />
-            <RenderInput type="text" name="Location" />
-            <RenderInput type="text" name="Category" />
-            <RenderInput type="text" name="Number" />
-            <RenderInput type="text" name="Coordinates" />
-            <ImageInput />
+        <ModalHeader title="Add Brand" />
+        <form className="brand_modal_elements" onSubmit={handleSubmit}>
+            <RenderInput type="text" name="Brand Name" onChange={(name: any) => setBrandName(name.target.value)}/>
             <SubmitButton />
         </form>
       </Modal>

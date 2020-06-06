@@ -5,19 +5,20 @@ import _ from "lodash";
 import "./Fields.scss";
 
 export interface dropDownListProps {
-  onChange: () => void;
-  data: string[];
-  valueField: string;
-  textField: string;
-  placeholder: string;
-  value: any;
-  type: string;
+  onChange?: () => void;
+  data?: string[];
+  valueField?: string;
+  textField?: string;
+  placeholder?: string;
+  value?: any;
+  type?: any;
   label?: string;
   dropUp?: boolean;
+  name?: string;
 }
 
 export interface inputProps {
-  onChange?: () => void;
+  onChange?: any;
   label?: string;
   className?: string;
   placeholder?: string;
@@ -57,9 +58,23 @@ export const renderDropdownList = ({
             valueComponent={({ item }) => (
               <span className="flex-row">
                 <p className="p2 tertiary-text">{label}:</p>
-                <p className="p2 primary-text">{item[textField]}</p>
+                {/* <p className="p2 primary-text">{item[textField]}</p> */}
               </span>
             )}
+          />
+        </div>
+      );
+    case "products":
+      return (
+        <div className={`simple-dropdown_products ${dropUp ? "dropdown-dropUp" : ""}`}>
+          <DropdownList
+            data={data}
+            valueField={valueField}
+            textField={textField}
+            onChange={onChange}
+            placeholder={placeholder}
+            value={value}
+            dropUp={dropUp && true}
           />
         </div>
       );
@@ -105,19 +120,18 @@ export const RenderInput = ({
 
 export const ImageInput = () => (
   <div className="field_container">
-  <label className="image_label">
-    <input type="file" accept="image/*"/>
-    {/* Upload Image */}
-  </label>
+    <label className="image_label">
+      <input type="file" accept="image/*" />
+      {/* Upload Image */}
+    </label>
   </div>
-)
+);
 
 export const SubmitButton = () => (
   <div className="field_container">
-
-    <input type="submit" name="Submit" className="submit_btn"/>
+    <input type="submit" name="Submit" className="submit_btn" />
   </div>
-)
+);
 
 export const renderIconInput = ({
   placeholder,
