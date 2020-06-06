@@ -1,4 +1,4 @@
-const Product = require('../models/product');
+const Product = require("../models/product");
 
 exports.getProducts = async (req, res) => {
   await Product.find()
@@ -8,7 +8,7 @@ exports.getProducts = async (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || 'Some error occurred while retrieving the products .',
+          err.message || "Some error occurred while retrieving the products .",
       });
     });
 };
@@ -18,7 +18,7 @@ exports.getProduct = async (req, res) => {
     .then((product) => {
       if (!product) {
         return res.status(404).send({
-          message: 'Product not found',
+          message: "Product not found",
         });
       } else {
         res.send(product);
@@ -26,7 +26,7 @@ exports.getProduct = async (req, res) => {
     })
     .catch((err) => {
       return res.status(500).send({
-        message: 'Error retrieving product.',
+        message: "Error retrieving product.",
       });
     });
 };
@@ -34,7 +34,7 @@ exports.getProduct = async (req, res) => {
 exports.addProducts = async (req, res) => {
   if (!req.body) {
     return res.status(400).send({
-      message: 'product content can not be empty',
+      message: "product content can not be empty",
     });
   }
   const product = new Product(req.body);
@@ -46,7 +46,7 @@ exports.addProducts = async (req, res) => {
     .catch((err) => {
       res.status(500).send({
         message:
-          err.message || 'Some error occurred while adding the product .',
+          err.message || "Some error occurred while adding the product .",
       });
     });
 };
@@ -54,7 +54,7 @@ exports.addProducts = async (req, res) => {
 exports.updateProduct = async (req, res) => {
   if (!req.body || !req.params.productId) {
     return res.status(400).send({
-      message: 'Incomplete details',
+      message: "Incomplete details",
     });
   }
   try {
@@ -66,7 +66,7 @@ exports.updateProduct = async (req, res) => {
     return res.send(doc);
   } catch (err) {
     res.status(500).send({
-      message: err.message || 'Error updating Product',
+      message: err.message || "Error updating Product",
     });
   }
 };
@@ -76,14 +76,14 @@ exports.deleteProduct = async (req, res) => {
     .then((product) => {
       if (!product) {
         return res.status(404).send({
-          message: 'Product not found',
+          message: "Product not found",
         });
       }
-      res.send({ message: 'Product deleted successfully!' });
+      res.send(product);
     })
     .catch((err) => {
       return res.status(500).send({
-        message: err.message || 'Could not delete Product',
+        message: err.message || "Could not delete Product",
       });
     });
 };

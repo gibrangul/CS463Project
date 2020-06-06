@@ -1,4 +1,5 @@
 const Brand = require("../models/brands");
+const Product = require("../models/product");
 
 const getBrands = async (req, res) => {
   try {
@@ -20,6 +21,20 @@ const getBrand = async (req, res) => {
       message: err.message || "Error retrieving Brands",
     });
   }
+};
+
+const getProducts = async (req, res) => {
+  id = req.params.id;
+  await Product.find({ "brand.id": id })
+    .then((products) => {
+      res.send(products);
+    })
+    .catch((err) => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving the products .",
+      });
+    });
 };
 
 const addBrand = async (req, res) => {
@@ -47,7 +62,11 @@ const updateBrand = async (req, res) => {
   }
   try {
     const id = req.params.id;
-    const doc = await Brand.findByIdAndUpdate(id, req.body, { new: true });
+    const doc = await Brand.findByIdAndUpdate(
+      id,
+      { $set: { ...req.body } },
+      { new: true }
+    );
     if (!doc) {
       return res.status(404).send();
     }
@@ -82,6 +101,7 @@ const deleteBrand = async (req, res) => {
 module.exports = {
   getBrands,
   getBrand,
+  getProducts,
   addBrand,
   updateBrand,
   deleteBrand,
