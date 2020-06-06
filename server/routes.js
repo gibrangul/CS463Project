@@ -1,9 +1,31 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("passport");
+require("./middleware/passport");
+const User = require("./models/user");
+const authController = require("./controllers/authentication");
 const productController = require("./controllers/product");
 const brandsController = require("./controllers/brands");
 const categoriesController = require("./controllers/categories");
 const retailersController = require("./controllers/retailers");
+
+const requireAuth = passport.authenticate("jwt", { session: false });
+const requireSignIn = passport.authenticate("local", { session: false });
+
+/*****
+  AUTH ROUTES
+*****/
+router.get("/", requireAuth, (req, res) => {
+  res.send({ hello: "bro" });
+});
+
+router.get("/users", async (req, res) => {
+  const users = await User.find();
+  res.send(users);
+});
+
+router.post("/signup", authController.signup);
+router.post("/signin", requireSignIn, authController.signIn);
 
 /*****
   PRODUCT ROUTES

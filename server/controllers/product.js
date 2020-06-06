@@ -1,4 +1,6 @@
 const Product = require("../models/product");
+const Brand = require("../models/brands");
+const Category = require("../models/category");
 
 exports.getProducts = async (req, res) => {
   await Product.find()
@@ -37,18 +39,33 @@ exports.addProducts = async (req, res) => {
       message: "product content can not be empty",
     });
   }
-  const product = new Product(req.body);
-  await product
-    .save()
-    .then((products) => {
-      res.send(products);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while adding the product .",
-      });
+  try {
+    const product = new Product(req.body);
+    const doc = await product.save();
+    await Brand.findByIdAndUpdate(
+      doc.brand.id,
+      {
+        $push: {
+          products: { _id: doc._id },
+        },
+      },
+      { new: true }
+    );
+    await Category.findByIdAndUpdate(
+      doc.category.id,
+      {
+        $push: {
+          products: { _id: doc._id },
+        },
+      },
+      { new: true }
+    );
+    return res.send(doc);
+  } catch (err) {
+    return res.status(500).send({
+      message: err.message || "Some error occurred while adding the product .",
     });
+  }
 };
 
 exports.updateProduct = async (req, res) => {
