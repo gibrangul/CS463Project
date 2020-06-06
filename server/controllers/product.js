@@ -97,21 +97,38 @@ exports.updateProduct = async (req, res) => {
 };
 
 exports.deleteProduct = async (req, res) => {
-  Product.findOneAndRemove({
-    _id: req.params.productId,
-    _vendor: "5edbb5ab647d1e966d328dfa",
-  })
-    .then((product) => {
-      if (!product) {
-        return res.status(404).send({
-          message: "Product not found",
-        });
-      }
-      res.send(product);
-    })
-    .catch((err) => {
-      return res.status(500).send({
-        message: err.message || "Could not delete Product",
-      });
+  try {
+    const product = await Product.findOneAndRemove({
+      _id: req.params.productId,
+      _vendor: "5edbb5ab647d1e966d328dfa",
     });
+    if (!product) {
+      return res.status(404).send({
+        message: "Product not found",
+      });
+    }
+    await Brand.findByIdAndUpdate(
+      product.brand.id,
+      {
+        $pull: {
+          products: { _id: product._id },
+        },
+      },
+      { new: true }
+    );
+    await Category.findByIdAndUpdate(
+      product.category.id,
+      {
+        $pull: {
+          products: { _id: product._id },
+        },
+      },
+      { new: true }
+    );
+    res.send(product);
+  } catch (err) {
+    return res.status(500).send({
+      message: err.message || "Could not delete Product",
+    });
+  }
 };
