@@ -1,21 +1,21 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPage, setLoader } from "../../Actions";
+import { selectPage, setLoader, fetchCategories } from "../../Actions";
 import { CATEGORIES } from "../../Constants/pages";
 import ContentHeader from "./ContentHeader";
 
 import Table from "../../Components/Table";
 import { categoriesColumns } from './tableColumns';
 
-import { categoriesData } from './dummyData.js';
-
 const CategoriesPage = () => {
   const dispatch = useDispatch();
   const loading = useSelector(
     (state: { isLoading: boolean }) => state.isLoading
   );
+  const categories = useSelector((state: any) => state.categories);
   const loadData = useCallback(() => {
     dispatch(selectPage(CATEGORIES));
+    dispatch(fetchCategories());
     setTimeout(() => dispatch(setLoader(false)) , 500)
   }, [dispatch]);
 
@@ -31,7 +31,7 @@ const CategoriesPage = () => {
         <ContentHeader />
         <Table
           columns={columns}
-          data={categoriesData}
+          data={Object.values(categories)}
           onClick={() => console.log("clicked")}
           className="retailersPageTable"
         />

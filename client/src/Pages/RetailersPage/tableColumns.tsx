@@ -4,13 +4,13 @@ import IndexCell from '../../Components/Table/IndexCell';
 export const retailerColumns = [
   {
     Header: "#",
-    accessor: "id",
+    accessor: "0",
     maxWidth: 66,
     Cell: IndexCell
   },
   {
     Header: "NAME",
-    accessor: (d: any) => ({ name: d.name, desc: d.address}),
+    accessor: (d: any) => ({ name: d.name, desc: d.location + ", " + d.city }),
     Cell: TwoLineCell
   },
   {
@@ -19,25 +19,30 @@ export const retailerColumns = [
     width: 55
   },
   {
+    Header: "EMAIL",
+    accessor: "email",
+    width: 65
+  },
+  {
     Header: "ADDED ON",
     accessor: "addedOn",
     width: 50
   },
   {
     Header: "PRODUCTS",
-    accessor: "products",
+    accessor: "products.length",
     width: 40
   },
-  {
-    Header: "ORDERS",
-    accessor: "orders",
-    width: 30
-  },
-  {
-    Header: "REVENUE(Rs)",
-    accessor: "revenue",
-    width: 45
-  }
+  // {
+  //   Header: "ORDERS",
+  //   accessor: "orders",
+  //   width: 30
+  // },
+  // {
+  //   Header: "REVENUE(Rs)",
+  //   accessor: "revenue",
+  //   width: 45
+  // }
 ];
 
 // id: "0",
