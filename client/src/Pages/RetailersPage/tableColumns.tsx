@@ -37,7 +37,7 @@ export const retailerColumns = [
   {
     Header: "Delete",
     accessor: (d: any) => ({ id: d._id, type: "retailer" }),
-    maxWidth: 80,
+    maxWidth: 50,
     Cell: DeleteCell,
   },
 ];

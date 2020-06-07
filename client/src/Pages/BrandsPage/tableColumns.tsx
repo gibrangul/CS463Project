@@ -28,7 +28,7 @@ export const brandsColumns = [
   {
     Header: "Delete",
     accessor: (d: any) => ({ id: d._id, type: "brand" }),
-    maxWidth: 80,
+    maxWidth: 50,
     Cell: DeleteCell,
   },
 ];

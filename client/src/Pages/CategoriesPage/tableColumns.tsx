@@ -28,7 +28,7 @@ export const categoriesColumns = [
   {
     Header: "Delete",
     accessor: (d: any) => ({ id: d._id, type: "category" }),
-    maxWidth: 80,
+    maxWidth: 50,
     Cell: DeleteCell,
   },
 ];
