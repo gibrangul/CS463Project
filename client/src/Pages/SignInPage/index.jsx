@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { connect, useSelector } from "react-redux";
+import { connect, useSelector, useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -11,8 +11,7 @@ import Container from "@material-ui/core/Container";
 import logo from "../../Assets/logo.png";
 
 import "./SignInPage.styles.scss";
-
-import { startEmailLogin } from "../../Actions";
+import { signIn } from "../../Actions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,8 +23,8 @@ const useStyles = makeStyles((theme) => ({
   },
   main: {
     backgroundColor: "#fff",
-    boxShadow: '0px 8px 25px 0px #EEE',
-    borderRadius: "10px"
+    boxShadow: "0px 8px 25px 0px #EEE",
+    borderRadius: "10px",
   },
   form: {
     width: "100%",
@@ -39,34 +38,43 @@ const useStyles = makeStyles((theme) => ({
     margin: "12px",
   },
   error: {
-    color: 'red',
+    color: "red",
     fontSize: "12px",
-  }
+  },
 }));
 
 const SignIn = (props) => {
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const auth_error = useSelector(state => state.auth.error)
+  const auth_error = useSelector((state) => state.auth.errorMessage);
 
   useEffect(() => {
+    console.log(auth_error);
     setError(auth_error);
   }, [auth_error]);
 
   const onLogin = async (e) => {
     e.preventDefault();
-    await props.startEmailLogin(email, password);
+    // await props.startEmailLogin(email, password);
+    dispatch(
+      signIn({ email, password }, () => {
+        props.history.push("/retailers");
+      })
+    );
   };
 
   return (
     <Container component="main" className={classes.main} maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <img className="logo" src={logo} alt="retailify_logo" />
+        <h1>
+          Inventory CMS
+        </h1>
         <h3 className={classes.subHeading} color="textPrimary">
           Sign in with Admin Account
         </h3>
@@ -95,10 +103,6 @@ const SignIn = (props) => {
             autoComplete="current-password"
             onChange={(password) => setPassword(password.target.value)}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
           <Button
             type="submit"
             fullWidth
@@ -110,12 +114,14 @@ const SignIn = (props) => {
             Sign in
           </Button>
         </form>
-        {error && <Typography className={classes.error} color="textPrimary">{error}</Typography>}
+        {error && (
+          <Typography className={classes.error} color="textPrimary">
+            {error}
+          </Typography>
+        )}
       </div>
     </Container>
   );
 };
 
-export default connect(null, {
-  startEmailLogin,
-})(SignIn);
+export default SignIn;

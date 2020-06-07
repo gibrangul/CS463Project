@@ -49,11 +49,13 @@ const signup = (req, res, next) => {
 };
 
 const signIn = (req, res, next) => {
-  res.send({ token: genToken(req.user) });
+  res.send({
+    token: genToken(req.user),
+    user: { uid: req.user._id, username: req.user.username },
+  });
 };
-
 
 module.exports = {
   signup,
-  signIn
-}
+  signIn,
+};

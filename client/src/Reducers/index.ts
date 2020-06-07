@@ -5,6 +5,7 @@ import productsReducer from "./productsReducer";
 import categoriesReducer from "./categoriesReducer";
 import retailersReducer from "./retailersReducer";
 import brandsReducer from "./brandsReducer";
+import authReducer from "./authReducer";
 
 export default combineReducers({
   retailers: retailersReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   isLoading: loaderReducer,
   products: productsReducer,
   categories: categoriesReducer,
-  brands: brandsReducer
+  brands: brandsReducer,
+  auth: authReducer
 });
