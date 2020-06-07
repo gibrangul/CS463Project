@@ -1,16 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectPage,
-  setLoader,
-  fetchProducts,
-  fetchCategories,
-  fetchBrands,
-} from "../../Actions";
+import { selectPage, setLoader } from "../../Actions";
+import Table from "../../Components/Table";
 import { PRODUCTS } from "../../Constants/pages";
 import ContentHeader from "./ContentHeader";
-
-import Table from "../../Components/Table";
 import { productsColumns } from "./tableColumns";
 
 const ProductsPage = () => {

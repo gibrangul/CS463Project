@@ -1,12 +1,12 @@
-import React, { useMemo, useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPage, setLoader, fetchRetailers } from "../../Actions";
-import "./RetailersPage.scss";
-import ContentHeader from "./ContentHeader";
+import { selectPage, setLoader } from "../../Actions";
 import Table from "../../Components/Table";
-import { retailerColumns } from "./tableColumns";
-import FilterBar from "./FilterBar";
 import { RETAILERS } from "../../Constants/pages";
+import ContentHeader from "./ContentHeader";
+import FilterBar from "./FilterBar";
+import "./RetailersPage.scss";
+import { retailerColumns } from "./tableColumns";
 
 const RetailersPage = () => {
   const dispatch = useDispatch();

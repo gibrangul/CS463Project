@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Field, renderIconInput } from "../../Components/Fields";
 import AddRetailerModal from "../../Components/Modals/AddRetailerModel/AddRetailerModal";
 
@@ -31,7 +31,7 @@ const ContentHeader = (props: any) => {
         {/* <button className="btn btn-primary-border">
           Add Retailer
         </button> */}
-        <AddRetailerModal/>
+        <AddRetailerModal />
       </div>
     </div>
   );
