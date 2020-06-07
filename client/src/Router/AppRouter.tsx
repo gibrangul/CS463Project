@@ -1,29 +1,32 @@
+import axios from "axios";
 import React from "react";
-import history from "../history";
+import { useSelector } from "react-redux";
 import { Router, Switch } from "react-router-dom";
-
-import SignInPage from "../Pages/SignInPage/SignInPage";
-import RetailersPage from "../Pages/RetailersPage";
-import CategoriesPage from "../Pages/CategoriesPage/CategoriesPage";
+import history from "../history";
 import BrandsPage from "../Pages/BrandsPage/BrandsPage";
+import CategoriesPage from "../Pages/CategoriesPage/CategoriesPage";
 import ProductsPage from "../Pages/ProductsPage/ProductsPage";
-
+import RetailersPage from "../Pages/RetailersPage";
+import SignInPage from "../Pages/SignInPage";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 
-const AppRouter = () => (
-  <div>
-    <Router history={history}>
-      <Switch>
-        {/* <PublicRoute path="/" exact component={SignInPage} /> */}
-        <PrivateRoute exact path="/" component={RetailersPage} />
-        <PrivateRoute path="/retailers" component={RetailersPage} />
-        <PrivateRoute path="/products" component={ProductsPage}/>
-        <PrivateRoute path="/categories" component={CategoriesPage} />
-        <PrivateRoute path="/brands" component={BrandsPage}/>
-      </Switch>
-    </Router>
-  </div>
-);
+const AppRouter = () => {
+  const token = useSelector((state: any) => state.auth.authenticated);
+  axios.defaults.headers.common["authorization"] = token;
+  return (
+    <div>
+      <Router history={history}>
+        <Switch>
+          <PublicRoute exact path="/" component={SignInPage} />
+          <PrivateRoute path="/retailers" component={RetailersPage} />
+          <PrivateRoute path="/products" component={ProductsPage} />
+          <PrivateRoute path="/categories" component={CategoriesPage} />
+          <PrivateRoute path="/brands" component={BrandsPage} />
+        </Switch>
+      </Router>
+    </div>
+  );
+};
 
 export default AppRouter;

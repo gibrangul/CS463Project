@@ -1,6 +1,6 @@
-.modal_container {
+.retailer_modal_container {
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 30%;
   bottom: auto;
   right: auto;
@@ -14,10 +14,11 @@
   outline: none;
 }
 
-.modal_elements {
+.retailer_modal_elements {
   display: flex;
-  height: 60vh;
+  height: 50vh;
   flex-direction: column;
   flex-wrap: wrap;
-
+  align-items: center;
+  justify-content: center;
 }

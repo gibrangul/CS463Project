@@ -22,7 +22,7 @@ mongoose
     useNewUrlParser: true,
   })
   .then(() => {
-    console.log('Succesfully connected to database');
+    console.log('Successfully connected to database');
     app.listen(port, () => {
       console.log(`Server up on port ${port}`);
     });

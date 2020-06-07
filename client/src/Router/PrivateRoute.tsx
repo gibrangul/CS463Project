@@ -7,7 +7,6 @@ import pagesInterface from "../Interfaces/pagesInterface";
 import Loader from "react-loaders";
 
 const PrivateRoute = ({ component: Component, ...rest }: any) => {
-
   const isLoaded = useSelector(
     (state: { isLoading: boolean }) => state.isLoading
   );
@@ -16,12 +15,15 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => {
     (state: pagesInterface) => state.navigation.currentPage
   );
 
+  const isAuthenticated = useSelector(
+    (state: any) => !!state.auth.authenticated
+  );
+
   return (
     <Route
       {...rest}
-      component={
-        (props: any) => (
-          // isAuthenticated ?
+      component={(props: any) =>
+        isAuthenticated ? (
           <div className="container">
             <Navbar />
             <div className="content-container">
@@ -30,10 +32,9 @@ const PrivateRoute = ({ component: Component, ...rest }: any) => {
               <Component {...props} />
             </div>
           </div>
+        ) : (
+          <Redirect to="/" />
         )
-        // : (
-        //   <Redirect to="/" />
-        // )
       }
     />
   );

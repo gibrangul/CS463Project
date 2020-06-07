@@ -1,14 +1,29 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
+const moment = require("moment");
 
 const Schema = mongoose.Schema;
 
+var productSchema = new Schema(
+  {
+    _id: {
+      type: String,
+      required: true,
+    },
+  },
+  { _id: false }
+);
+
 const categorySchema = new Schema({
-  type: {
+  name: {
     type: String,
     required: true,
   },
-  products: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+  addedOn: {
+    type: Number,
+    default: moment().unix(),
+  },
+  products: [productSchema],
   //timestamps: true,
 });
 
-module.exports = mongoose.model('Category', categorySchema);
+module.exports = mongoose.model("Category", categorySchema);

@@ -1,19 +1,28 @@
-import React, { useMemo, useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPage, setLoader } from "../../Actions";
-import "./RetailersPage.scss";
-import ContentHeader from "./ContentHeader";
 import Table from "../../Components/Table";
-import { retailerColumns } from "./tableColumns";
-import { retailers } from "./dummyData";
-import FilterBar from "./FilterBar";
 import { RETAILERS } from "../../Constants/pages";
+import ContentHeader from "./ContentHeader";
+import FilterBar from "./FilterBar";
+import "./RetailersPage.scss";
+import { retailerColumns } from "./tableColumns";
 
 const RetailersPage = () => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
   const loading = useSelector(
     (state: { isLoading: boolean }) => state.isLoading
   );
+  const retailers = useSelector((state: any) =>
+    Object.values(state.retailers).filter(
+      (retailer: any) =>
+        retailer.name.toLowerCase().includes(search.toLowerCase()) ||
+        retailer.city.toLowerCase().includes(search.toLowerCase()) ||
+        retailer.location.toLowerCase().includes(search.toLowerCase())
+    )
+  );
+
   const loadData = useCallback(() => {
     dispatch(selectPage(RETAILERS));
     setTimeout(() => dispatch(setLoader(false)), 500);
@@ -30,10 +39,16 @@ const RetailersPage = () => {
         <FilterBar />
         <div className="content">
           <div className="wrapped-content">
-            <ContentHeader />
+            <ContentHeader
+              count={retailers.length}
+              search={(term: string) => setSearch(term)}
+            />
             <Table
               columns={columns}
-              data={retailers}
+              data={retailers.map((data: any, index: number) => ({
+                ...data,
+                index: index + 1,
+              }))}
               onClick={() => console.log("clicked")}
               className="retailersPageTable"
             />

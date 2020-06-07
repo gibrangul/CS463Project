@@ -1,0 +1,23 @@
+.category_modal_container {
+  position: absolute;
+  top: 20%;
+  left: 30%;
+  bottom: auto;
+  right: auto;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  border-radius: 8px;
+  border: none;
+  width: 40vw;
+  outline: none;
+}
+
+.category_modal_elements {
+  display: flex;
+  height: 30vh;
+  flex-direction: column;
+  align-items: center;
+
+}

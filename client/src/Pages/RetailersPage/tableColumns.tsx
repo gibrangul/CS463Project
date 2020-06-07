@@ -1,16 +1,17 @@
 import TwoLineCell from '../../Components/Table/TwoLineCell';
 import IndexCell from '../../Components/Table/IndexCell';
+import DeleteCell from '../../Components/Table/DeleteCell';
 
 export const retailerColumns = [
   {
     Header: "#",
-    accessor: "id",
+    accessor: (d:any) => d.index,
     maxWidth: 66,
     Cell: IndexCell
   },
   {
     Header: "NAME",
-    accessor: (d: any) => ({ name: d.name, desc: d.address}),
+    accessor: (d: any) => ({ name: d.name, desc: d.location + ", " + d.city }),
     Cell: TwoLineCell
   },
   {
@@ -19,32 +20,24 @@ export const retailerColumns = [
     width: 55
   },
   {
+    Header: "EMAIL",
+    accessor: "email",
+    width: 65
+  },
+  {
     Header: "ADDED ON",
     accessor: "addedOn",
     width: 50
   },
   {
     Header: "PRODUCTS",
-    accessor: "products",
+    accessor: "products.length",
     width: 40
   },
   {
-    Header: "ORDERS",
-    accessor: "orders",
-    width: 30
+    Header: "Delete",
+    accessor: (d: any) => ({ id: d._id, type: "retailer" }),
+    maxWidth: 50,
+    Cell: DeleteCell,
   },
-  {
-    Header: "REVENUE(Rs)",
-    accessor: "revenue",
-    width: 45
-  }
 ];
-
-// id: "0",
-//       name: "Freshlee",
-//       address: "E-11/3, Islamabad",
-//       number: "number",
-//       addedOn: "04 Apr 2020",
-//       products: "1,200",
-//       orders: "20",
-//       revenue: "1,000",
