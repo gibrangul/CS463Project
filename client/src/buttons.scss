@@ -58,6 +58,43 @@
   }
 }
 
+.btn-danger-border {
+  @extend .btn;
+  background-color: $colorDanger;
+  color: white;
+  padding: 0 24px;
+  border: 1px solid #BA0B15;
+  box-shadow: 0 1px 2px rgba($color: white, $alpha: 0.1) inset;
+  background: linear-gradient(
+    0deg,
+    rgba(208, 49, 21, 1) 0%
+    rgba(230, 59, 29, 1) 100%,
+  );
+
+  &:hover {
+    background: linear-gradient(
+      0deg,
+      rgba(197, 44, 17, 1) 0%,
+      rgba(221, 52, 22, 1) 100%
+    );
+  }
+
+  &:active {
+    background: linear-gradient(
+      0deg,
+      rgba(184, 40, 14, 1) 0%,
+      rgba(193, 43, 16, 1) 100%
+    );
+  }
+
+  &:disabled {
+    background: #747578;
+    border-color: #696a62;
+    box-shadow: none;
+    cursor: default;
+  }
+}
+
 .btn-icon-small {
   padding: 0;
   border: none;

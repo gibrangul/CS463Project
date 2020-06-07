@@ -1,6 +1,6 @@
-import React, { useMemo, useCallback, useEffect } from "react";
+import React, { useMemo, useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectPage, setLoader, fetchRetailers} from "../../Actions";
+import { selectPage, setLoader, fetchRetailers } from "../../Actions";
 import "./RetailersPage.scss";
 import ContentHeader from "./ContentHeader";
 import Table from "../../Components/Table";
@@ -10,14 +10,21 @@ import { RETAILERS } from "../../Constants/pages";
 
 const RetailersPage = () => {
   const dispatch = useDispatch();
+  const [search, setSearch] = useState("");
   const loading = useSelector(
     (state: { isLoading: boolean }) => state.isLoading
   );
-  const retailers = useSelector((state: any) => state.retailers);
+  const retailers = useSelector((state: any) =>
+    Object.values(state.retailers).filter(
+      (retailer: any) =>
+        retailer.name.toLowerCase().includes(search.toLowerCase()) ||
+        retailer.city.toLowerCase().includes(search.toLowerCase()) ||
+        retailer.location.toLowerCase().includes(search.toLowerCase())
+    )
+  );
 
   const loadData = useCallback(() => {
     dispatch(selectPage(RETAILERS));
-    dispatch(fetchRetailers());
     setTimeout(() => dispatch(setLoader(false)), 500);
   }, [dispatch]);
 
@@ -32,10 +39,13 @@ const RetailersPage = () => {
         <FilterBar />
         <div className="content">
           <div className="wrapped-content">
-            <ContentHeader />
+            <ContentHeader
+              count={retailers.length}
+              search={(term: string) => setSearch(term)}
+            />
             <Table
               columns={columns}
-              data={Object.values(retailers).map((data: any, index: number) => ({
+              data={retailers.map((data: any, index: number) => ({
                 ...data,
                 index: index + 1,
               }))}

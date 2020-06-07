@@ -1,10 +1,12 @@
+import React from "react";
 import TwoLineCell from "../../Components/Table/TwoLineCell";
 import IndexCell from "../../Components/Table/IndexCell";
+import DeleteCell from "../../Components/Table/DeleteCell";
 
 export const brandsColumns = [
   {
     Header: "#",
-    accessor: (d:any) => d.index,
+    accessor: (d: any) => d.index,
     maxWidth: 66,
     Cell: IndexCell,
   },
@@ -22,5 +24,11 @@ export const brandsColumns = [
     Header: "NUMBER OF PRODUCTS",
     accessor: "products.length",
     maxWidth: 80,
+  },
+  {
+    Header: "Delete",
+    accessor: (d: any) => ({ id: d._id, type: "brand" }),
+    maxWidth: 80,
+    Cell: DeleteCell,
   },
 ];

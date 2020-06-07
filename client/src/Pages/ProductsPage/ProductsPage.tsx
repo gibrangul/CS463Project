@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectPage,
@@ -14,16 +14,21 @@ import Table from "../../Components/Table";
 import { productsColumns } from "./tableColumns";
 
 const ProductsPage = () => {
+  const [search, setSearch] = useState("");
   const loading = useSelector(
     (state: { isLoading: boolean }) => state.isLoading
   );
-  const products = useSelector((state: any) => state.products);
+  const products = useSelector((state: any) =>
+    Object.values(state.products).filter(
+      (product: any) =>
+        product.title.toLowerCase().includes(search.toLowerCase()) ||
+        product.upc.toLowerCase().includes(search.toLowerCase())
+    )
+  );
+
   const dispatch = useDispatch();
   const loadData = useCallback(() => {
     dispatch(selectPage(PRODUCTS));
-    dispatch(fetchProducts());
-    dispatch(fetchCategories());
-    dispatch(fetchBrands());
     setTimeout(() => dispatch(setLoader(false)), 500);
   }, [dispatch]);
 
@@ -33,18 +38,19 @@ const ProductsPage = () => {
 
   const columns = useMemo(() => productsColumns, []);
 
-  const productsArray = Object.values(products).map(
-    (data: any, index: number) => ({
-      ...data,
-      index: index + 1,
-    })
-  );
+  const productsArray = products.map((data: any, index: number) => ({
+    ...data,
+    index: index + 1,
+  }));
 
   return (
     !loading && (
       <div className="content">
         <div className="wrapped-content">
-          <ContentHeader />
+          <ContentHeader
+            count={products.length}
+            search={(term: string) => setSearch(term)}
+          />
           <Table
             columns={columns}
             data={productsArray}

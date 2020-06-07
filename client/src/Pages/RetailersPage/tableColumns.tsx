@@ -1,5 +1,6 @@
 import TwoLineCell from '../../Components/Table/TwoLineCell';
 import IndexCell from '../../Components/Table/IndexCell';
+import DeleteCell from '../../Components/Table/DeleteCell';
 
 export const retailerColumns = [
   {
@@ -33,23 +34,10 @@ export const retailerColumns = [
     accessor: "products.length",
     width: 40
   },
-  // {
-  //   Header: "ORDERS",
-  //   accessor: "orders",
-  //   width: 30
-  // },
-  // {
-  //   Header: "REVENUE(Rs)",
-  //   accessor: "revenue",
-  //   width: 45
-  // }
+  {
+    Header: "Delete",
+    accessor: (d: any) => ({ id: d._id, type: "retailer" }),
+    maxWidth: 80,
+    Cell: DeleteCell,
+  },
 ];
-
-// id: "0",
-//       name: "Freshlee",
-//       address: "E-11/3, Islamabad",
-//       number: "number",
-//       addedOn: "04 Apr 2020",
-//       products: "1,200",
-//       orders: "20",
-//       revenue: "1,000",

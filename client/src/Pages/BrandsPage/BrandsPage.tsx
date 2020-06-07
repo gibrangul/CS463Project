@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectPage, setLoader, fetchBrands } from "../../Actions";
 import { BRANDS } from "../../Constants/pages";
@@ -11,10 +11,17 @@ const BrandsPage = () => {
   const loading = useSelector(
     (state: { isLoading: boolean }) => state.isLoading
   );
-  const brands = useSelector((state: any) => state.brands);
+
+  const [search, setSearch] = useState("");
+
+  const brands = useSelector((state: any) =>
+    Object.values(state.brands).filter((brand: any) =>
+      brand.name.toLowerCase().includes(search.toLowerCase())
+    )
+  );
+
   const loadData = useCallback(() => {
     dispatch(selectPage(BRANDS));
-    dispatch(fetchBrands());
     setTimeout(() => dispatch(setLoader(false)), 500);
   }, [dispatch]);
 
@@ -26,10 +33,13 @@ const BrandsPage = () => {
     !loading && (
       <div className="content">
         <div className="wrapped-content">
-          <ContentHeader />
+          <ContentHeader
+            count={brands.length}
+            search={(term: string) => setSearch(term)}
+          />
           <Table
             columns={brandsColumns}
-            data={Object.values(brands).map((data: any, index: number) => ({
+            data={brands.map((data: any, index: number) => ({
               ...data,
               index: index + 1,
             }))}

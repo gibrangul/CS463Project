@@ -3,7 +3,7 @@ const Brand = require("../models/brands");
 const Category = require("../models/category");
 
 exports.getProducts = async (req, res) => {
-  await Product.find({ _vendor: "5edbb5ab647d1e966d328dfa" })
+  await Product.find({ _vendor: req.user._id })
     .then((products) => {
       res.send(products);
     })
@@ -18,7 +18,7 @@ exports.getProducts = async (req, res) => {
 exports.getProduct = async (req, res) => {
   Product.findOne({
     _id: req.params.productId,
-    _vendor: "5edbb5ab647d1e966d328dfa",
+    _vendor: req.user._id,
   })
     .then((product) => {
       if (!product) {
@@ -43,7 +43,7 @@ exports.addProducts = async (req, res) => {
     });
   }
   try {
-    const _vendor = "5edbb5ab647d1e966d328dfa";
+    const _vendor = req.user._id;
     const product = new Product({ ...req.body, _vendor });
     const doc = await product.save();
     await Brand.findByIdAndUpdate(
@@ -81,7 +81,7 @@ exports.updateProduct = async (req, res) => {
   try {
     const _id = req.params.productId;
     const doc = await Product.findOneAndUpdate(
-      { _id, _vendor: "5edbb5ab647d1e966d328dfa" },
+      { _id, _vendor: req.user._id },
       { $set: { ...req.body } },
       { new: true }
     );
@@ -100,7 +100,7 @@ exports.deleteProduct = async (req, res) => {
   try {
     const product = await Product.findOneAndRemove({
       _id: req.params.productId,
-      _vendor: "5edbb5ab647d1e966d328dfa",
+      _vendor: req.user._id,
     });
     if (!product) {
       return res.status(404).send({

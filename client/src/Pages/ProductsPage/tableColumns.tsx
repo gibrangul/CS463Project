@@ -1,5 +1,6 @@
 import TwoLineCell from "../../Components/Table/TwoLineCell";
 import IndexCell from "../../Components/Table/IndexCell";
+import DeleteCell from "../../Components/Table/DeleteCell";
 
 export const productsColumns = [
   {
@@ -37,5 +38,11 @@ export const productsColumns = [
     Header: "COUNT",
     accessor: "count",
     width: 50,
+  },
+  {
+    Header: "Delete",
+    accessor: (d: any) => ({ id: d._id, type: "product" }),
+    maxWidth: 80,
+    Cell: DeleteCell,
   },
 ];
